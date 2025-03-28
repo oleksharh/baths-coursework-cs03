@@ -9,7 +9,11 @@ import java.io.*;
  */
 public enum EncounterType implements Serializable
 {
-    BLOCKADE(" Blockade"), BATTLE(" Battle"), SKIRMISH (" Skirmish"), INVALID (" Invalid");
+    BLOCKADE(" Blockade"),
+    BATTLE(" Battle"),
+    SKIRMISH (" Skirmish"),
+    INVALID (" Invalid");
+
     private String type;
     
     private EncounterType(String ty)

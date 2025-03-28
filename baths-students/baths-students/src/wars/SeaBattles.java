@@ -2,6 +2,7 @@ package wars;
 
 import java.util.*;
 import java.io.*;
+
 /**
  * This class implements the behaviour expected from the BATHS
  system as required for 5COM2007 Cwk1B BATHS - Feb 2025
@@ -24,8 +25,6 @@ public class SeaBattles implements BATHS
      */  
     public SeaBattles(String adm)
     {
-      
-        
        setupShips();
        setupEncounters();
     }
