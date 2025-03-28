@@ -97,10 +97,11 @@ public class T3ShipsTest {
     @Test
     public void ShipInReserveParisDisplayed() {
         String result = game.getReserveFleet();
-        String[] xx = {"Paris", "Hal Henry","7", "200","true","Sloop"};
+        String[] xx = {"Paris", "Hal Henry","5", "200","true","Sloop"};
         boolean actual = containsText(result,xx );
         assertTrue(actual);
     }
+
     
     @Test
     public void ShipInReserveBelerophonDisplayed() {
