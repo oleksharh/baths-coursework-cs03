@@ -6,9 +6,10 @@ abstract class Ship implements Serializable {
     protected String captain;
     protected int commissionFee;
     protected int battleSkill;
-    protected String state;
+    protected ShipState state;
 
-    public Ship(String name, String captain, int commissionFee, int battleSkill, String state) {
+    public Ship(String name, String captain, int commissionFee, int battleSkill, ShipState state)
+    {
         this.name = name;
         this.captain = captain;
         this.commissionFee = commissionFee;
@@ -16,13 +17,18 @@ abstract class Ship implements Serializable {
         this.state = state;
     }
 
-    public abstract int getCommissionFee();
-
-    public boolean canFight(EncounterType encounterType) {
-        return !state.equals("Damaged");
+    public int getCommissionFee()
+    {
+        return commissionFee;
     }
 
-    public void updateState(String newState) {
+    public boolean canFight()
+    {
+        return state != ShipState.SUNK && state != ShipState.RESERVE;
+    }
+
+    public void updateState(ShipState newState)
+    {
         this.state = newState;
     }
 }

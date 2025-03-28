@@ -50,7 +50,7 @@ public class T1InitializationTest {
     private boolean containsText(String text, String[] s) {
         boolean check = true;
         for(int i=0; i < s.length; i++)
-        check = check && text.contains(s[i]);
+            check = check && text.contains(s[i]);
         return check;
     }
     
@@ -58,7 +58,7 @@ public class T1InitializationTest {
     public void gameCorrectlyInitialised() {
         String result = game.toString();
         String[] xx = {"Olek","1000", "Is OK", "No ships"};
-        boolean actual = containsText(result,xx );
+        boolean actual = containsText(result, xx);
         assertTrue(actual);
     }
     

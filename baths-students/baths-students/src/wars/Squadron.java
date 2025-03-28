@@ -19,7 +19,7 @@ class Squadron implements Serializable {
 
     public Ship getFirstAvailableShip(EncounterType encounterType) {
         for (Ship ship : ships) {
-            if (ship.canFight(encounterType)) {
+            if (ship.canFight()) {
                 return ship;
             }
         }
