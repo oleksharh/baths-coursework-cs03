@@ -10,4 +10,17 @@ class ManOWar extends Ship {
         this.numDecks = numDecks;
         this.marines = marines;
     }
+
+    @Override
+    public String toString() {
+        return "ManOWar{" +
+                "name='" + name + '\'' +
+                ", captain='" + captain + '\'' +
+                ", commissionFee=" + commissionFee +
+                ", battleSkill=" + battleSkill +
+                ", state=" + state +
+                ", numDecks=" + numDecks +
+                ", marines=" + marines +
+                '}';
+    }
 }

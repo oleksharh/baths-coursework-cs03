@@ -17,6 +17,11 @@ class Squadron implements Serializable {
         ships.remove(ship);
     }
 
+    public boolean hasShips()
+    {
+        return !ships.isEmpty();
+    }
+
     public Ship getFirstAvailableShip(EncounterType encounterType) {
         for (Ship ship : ships) {
             if (ship.canFight()) {
@@ -24,5 +29,15 @@ class Squadron implements Serializable {
             }
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Squadron:\n");
+        for (Ship ship : ships) {
+            sb.append(ship.toString()).append("\n");
+        }
+        return sb.toString();
     }
 }

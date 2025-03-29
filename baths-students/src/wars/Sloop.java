@@ -8,4 +8,16 @@ class Sloop extends Ship {
         super(name, captain, commissionFee, 5, state);
         this.hasDoctor = hasDoctor;
     }
+
+    @Override
+    public String toString() {
+        return "Sloop{" +
+                "name='" + name + '\'' +
+                ", captain='" + captain + '\'' +
+                ", commissionFee=" + commissionFee +
+                ", battleSkill=" + battleSkill +
+                ", state=" + state +
+                ", hasDoctor=" + hasDoctor +
+                '}';
+    }
 }

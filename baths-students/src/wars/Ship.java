@@ -31,4 +31,27 @@ abstract class Ship implements Serializable {
     {
         this.state = newState;
     }
+
+    /*
+        * Returns true if the ship is in an active state (i.e., not sunk or in reserve).
+     */
+    public boolean isActive()
+    {
+        if (this.state == ShipState.ACTIVE)
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Ship{" +
+                "name='" + name + '\'' +
+                ", captain='" + captain + '\'' +
+                ", commissionFee=" + commissionFee +
+                ", battleSkill=" + battleSkill +
+                ", state=" + state +
+                '}';
+    }
+
 }

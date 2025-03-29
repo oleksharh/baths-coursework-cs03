@@ -11,4 +11,17 @@ class Frigate extends Ship {
         this.numCannons = numCannons;
         this.hasPinnace = hasPinnace;
     }
+
+    @Override
+    public String toString() {
+        return "Frigate{" +
+                "name='" + name + '\'' +
+                ", captain='" + captain + '\'' +
+                ", commissionFee=" + commissionFee +
+                ", battleSkill=" + battleSkill +
+                ", state=" + state +
+                ", numCannons=" + numCannons +
+                ", hasPinnace=" + hasPinnace +
+                '}';
+    }
 }

@@ -18,6 +18,7 @@ public class SeaBattles implements BATHS
     private double warChest;
     private HashMap<String, Ship> reserveFleet;
     private HashMap<Integer, Encounter> encounters;
+    private Squadron squadron;
 
 //**************** BATHS ************************** 
     /** Constructor requires the name of the admiral
@@ -91,6 +92,19 @@ public class SeaBattles implements BATHS
 
         // TODO: Here ships are fetched from the reserve fleet
         // On initialisation, the reserve fleet is the same as the sample data
+
+        StringBuilder sb = new StringBuilder();
+        for (Ship ship : reserveFleet.values())
+        {
+            sb.append(ship.toString());
+            sb.append("\n");
+        }
+
+        if (!sb.isEmpty())
+        {
+            return sb.toString();
+        }
+
         return "No ships";
     }
     
@@ -100,9 +114,12 @@ public class SeaBattles implements BATHS
      **/
     public String getSquadron()
     {
-   
+        if (squadron.hasShips())
+        {
+            return squadron.toString();
+        }
         
-        return "No ships";
+        return "No ships commissioned";
     }
     
     /**Returns a String representation of the ships sunk (or "no ships sunk yet")
