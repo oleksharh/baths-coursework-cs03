@@ -14,27 +14,29 @@ import java.io.*;
 public class SeaBattles implements BATHS 
 {
     // may have one HashMap and select on stat
-
     private String admiral;
     private double warChest;
-
+    private HashMap<String, Ship> reserveFleet;
+    private HashMap<Integer, Encounter> encounters;
 
 //**************** BATHS ************************** 
     /** Constructor requires the name of the admiral
-     * @param adm the name of the admiral
+     * @param admiral the name of the admiral
      */  
-    public SeaBattles(String adm)
+    public SeaBattles(String admiral)
     {
-       setupShips();
-       setupEncounters();
+        setupShips();
+        setupEncounters();
+        this.admiral = admiral;
+        this.warChest = 1000;
     }
     
     /** Constructor requires the name of the admiral and the
      * name of the file storing encounters
-     * @param admir the name of the admiral
+     * @param admiral the name of the admiral
      * @param filename name of file storing encounters
      */  
-    public SeaBattles(String admir, String filename)  //Task 3
+    public SeaBattles(String admiral, String filename)  //Task 3
     {
       
         
@@ -55,7 +57,10 @@ public class SeaBattles implements BATHS
     public String toString()
     {
         
-        return "null";
+        return admiral + " " +
+               + warChest + "" +
+               "Is OK " +
+               "No ships";
     }
     
     
@@ -74,7 +79,7 @@ public class SeaBattles implements BATHS
      */
     public double getWarChest()
     {
-        return 0;
+        return this.warChest;
     }
     
     
@@ -83,7 +88,9 @@ public class SeaBattles implements BATHS
      **/
     public String getReserveFleet()
     {   //assumes reserves is a Hashmap
-       
+
+        // TODO: Here ships are fetched from the reserve fleet
+        // On initialisation, the reserve fleet is the same as the sample data
         return "No ships";
     }
     
@@ -146,20 +153,20 @@ public class SeaBattles implements BATHS
     }
         
     /** Returns true if the ship with the name is in the admiral's squadron, false otherwise.
-     * @param nme is the name of the ship
+     * @param name is the name of the ship
      * @return returns true if the ship with the name is in the admiral's squadron, false otherwise.
      **/
-    public boolean isInSquadron(String nme)
+    public boolean isInSquadron(String name)
     {
         return false;
     }
     
     /** Decommissions a ship from the squadron to the reserve fleet (if they are in the squadron)
      * pre-condition: isInSquadron(nme)
-     * @param nme is the name of the ship
+     * @param name is the name of the ship
      * @return true if ship decommissioned, else false
      **/
-    public boolean decommissionShip(String nme)
+    public boolean decommissionShip(String name)
     {
         return false;
     }
@@ -216,7 +223,13 @@ public class SeaBattles implements BATHS
      **/
     public String getEncounter(int num)
     {
-        
+        Encounter enc = encounters.get(num);
+
+        if (enc != null)
+        {
+            return enc.toString();
+        }
+
         return "\nNo such encounter";
     }
     
@@ -225,7 +238,19 @@ public class SeaBattles implements BATHS
      **/
     public String getAllEncounters()
     {
- 
+        StringBuilder sb = new StringBuilder();
+
+        for (Encounter enc : encounters.values())
+        {
+            sb.append(enc.toString());
+            sb.append("\n");
+        }
+
+        if (!sb.isEmpty())
+        {
+            return sb.toString();
+        }
+
         return "No encounters";
     }
     
@@ -234,13 +259,25 @@ public class SeaBattles implements BATHS
     //*******************************************************************************
      private void setupShips()
      {
-       
+         reserveFleet = new HashMap<>();
 
+         reserveFleet.put("Victory", new ManOWar("Victory", "Alan Aikin", 3, ShipState.RESERVE, 3, 30));
+         reserveFleet.put("Sophie", new Frigate("Sophie", "Ben Baggins", 8, ShipState.RESERVE, 16, true));
+         reserveFleet.put("Endeavour", new ManOWar("Endeavour", "Col Cannon", 4, ShipState.RESERVE, 2, 20));
+         reserveFleet.put("Arrow", new Sloop("Arrow", "Dan Dare", 150, ShipState.RESERVE, true));
+         reserveFleet.put("Belerophon", new ManOWar("Belerophon", "Ed Evans", 8, ShipState.RESERVE, 3, 50));
+         reserveFleet.put("Surprise", new Frigate("Surprise", "Fred Fox", 6, ShipState.RESERVE, 10, false));
+         reserveFleet.put("Jupiter", new Frigate("Jupiter", "Gil Gamage", 7, ShipState.RESERVE, 20, false));
+         reserveFleet.put("Paris", new Sloop("Paris", "Hal Henry", 200, ShipState.RESERVE, true));
+         reserveFleet.put("Beast", new Sloop("Beast", "Ian Idle", 400, ShipState.RESERVE, false));
+         reserveFleet.put("Athena", new Sloop("Athena", "John Jones", 100, ShipState.RESERVE, true));
      }
      
     private void setupEncounters()
     {
-  
+        encounters = new HashMap<Integer, Encounter>();
+
+        readEncounters("baths-students/encountersAM.txt");
     }
         
     // Useful private methods to "get" objects from collections/maps
@@ -248,20 +285,37 @@ public class SeaBattles implements BATHS
     //*******************************************************************************
     //*******************************************************************************
   
-    /************************ Task 3 ************************************************/
+    //************************ Task 3 ************************************************
 
     
     //******************************** Task 3.5 **********************************
-    /** reads data about encounters from a text file and stores in collection of 
+    /** reads data about encounters from a text file and stores in collection of
      * encounters.Data in the file is editable
      * @param filename name of the file to be read
      */
     public void readEncounters(String filename)
-    { 
-      
-        
-        
-    }   
+    {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            int encounterId = 1;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 4) {
+                    EncounterType type = EncounterType.valueOf(parts[0].toUpperCase());
+                    String location = parts[1];
+                    int skill = Integer.parseInt(parts[2]);
+                    int prizeMoney = Integer.parseInt(parts[3]);
+
+                    Encounter encounter = new Encounter(encounterId, type, location, skill, prizeMoney);
+                    encounters.put(encounterId, encounter);
+
+                    encounterId ++; // increment encounter ID
+                }
+            }
+        } catch (IOException e) {
+            // TODO Handle the exception
+        }
+    }
  
     
     // ***************   file write/read  *********************

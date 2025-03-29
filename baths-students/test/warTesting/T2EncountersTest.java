@@ -48,7 +48,7 @@ public class T2EncountersTest {
     private boolean containsText(String text, String[] s) {
         boolean check = true;
         for(int i=0; i < s.length; i++)
-        check = check && text.contains(s[i]);
+            check = check && text.contains(s[i]);
         return check;
     }
     

@@ -8,7 +8,6 @@ class Encounter implements Serializable
     private String location;
     private int requiredSkill;
     private int prizeMoney;
-    private Ship enemyShip; // Presumably there will be an enemy ship in the encounter
 
     public Encounter(int id, EncounterType type, String location, int requiredSkill, int prizeMoney)
     {
@@ -34,16 +33,10 @@ class Encounter implements Serializable
         return prizeMoney;
     }
 
-//    public boolean fightEncounter(Ship ship)
-//    {
-//        if (ship.canFight(type) && ship.battleSkill >= requiredSkill)
-//        {
-//            return true;
-//        }
-//        else
-//        {
-//            ship.updateState("Damaged");
-//            return false;
-//        }
-//    }
+    @Override
+    public String toString()
+    {
+        return "Encounter ID: " + id + ", Type: " + type + ", Location: " + location +
+               ", Required Skill: " + requiredSkill + ", Prize Money: " + prizeMoney;
+    }
 }

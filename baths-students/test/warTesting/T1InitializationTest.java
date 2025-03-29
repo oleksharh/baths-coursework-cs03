@@ -78,12 +78,58 @@ public class T1InitializationTest {
     @Test
     public void checkTeamEmptyAtStart() {
         boolean result = true;
-        List<String> ships = new ArrayList<String>(Arrays.asList("Victory","Sophie",
-                 "Endeavour","Arrow", "Belerophon", "Surprise","Jupiter", "Paris", "Beast", "Athena"));
+        List<String> ships = new ArrayList<String>(
+            Arrays.asList(
+                "Victory", "Sophie",
+                "Endeavour", "Arrow", "Belerophon",
+                "Surprise", "Jupiter", "Paris",
+                "Beast", "Athena"
+            )
+        );
 
         for (String chmp : ships) {
             result = result && !game.isInSquadron(chmp);
         }
         assertTrue(result);
+    }
+
+    // Further tests
+
+    @Test
+    public void checkSquadronEmptyStart() {
+        String result = game.getSquadron();
+        String[] xx = {"No ships"};
+        boolean actual = containsText(result, xx);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void checkSunkShipsEmptyStart() {
+        String result = game.getSunkShips();
+        String[] xx = {"No ships"};
+        boolean actual = containsText(result, xx);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void checkGetEncounters() {
+        String result = game.getAllEncounters();
+        String[] xx = {"1", "Battle", "Trafalgar", "3","300"};
+        boolean actual = containsText(result, xx);
+
+        System.out.println(result);
+
+        assertTrue(actual);
+    }
+
+    @Test
+    public void checkGetEncounter() {
+        String result = game.getEncounter(1);
+        String[] xx = {"1", "Battle", "Trafalgar", "3","300"};
+        boolean actual = containsText(result, xx);
+
+        System.out.println(result);
+
+        assertTrue(actual);
     }
 }
