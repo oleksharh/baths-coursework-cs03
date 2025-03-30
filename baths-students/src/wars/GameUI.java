@@ -41,27 +41,43 @@ public class GameUI
             } 
             else if (choice == 4)
             {
-                //write your code here
-
+                System.out.println("Enter Name of Ship that you want to commision");
+                myIn.nextLine();
+                String res = myBattles.commissionShip(myIn.nextLine().trim());
+                System.out.println(res);
             }
             else if (choice == 5)
             {
-       	       //write your code here
-       
-                  
+                String availableEncounters = myBattles.getAllEncounters();
+                System.out.println("Available encounters:");
+                System.out.println(availableEncounters);
+
+                System.out.println("Please enter ID of encounter you want to fight: ");
+                int encounterID = myIn.nextInt();
+
+                String result = myBattles.fightEncounter(encounterID);
+
+                System.out.println(result);
             }
             else if (choice ==6)
             {
-	        //write your code here
-
-
+                System.out.println("Please enter name of the ship you want to restore: ");
+                myIn.nextLine();
+                myBattles.restoreShip(myIn.nextLine().trim());
             }
             else if (choice == 7)
             {
-                //write your code here
+                System.out.println("Enter Name of Ship that you want to decommission: ");
+                myIn.nextLine();
+                boolean res = myBattles.decommissionShip(myIn.nextLine().trim());
 
-
+                if (res == true) {
+                    System.out.println("Ship decommissioned.");
+                } else {
+                    System.out.println("Failed to decommission.");
+                }
             }
+
             else if (choice==8)
             {
                 System.out.println(myBattles.toString());

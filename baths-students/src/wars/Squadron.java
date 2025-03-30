@@ -22,9 +22,20 @@ class Squadron implements Serializable {
         return !ships.isEmpty();
     }
 
+    public List<Ship> getShips() { return ships; }
+
     public Ship getFirstAvailableShip(EncounterType encounterType) {
         for (Ship ship : ships) {
             if (ship.canFight()) {
+                return ship;
+            }
+        }
+        return null;
+    }
+
+    public Ship getShipByName(String name) {
+        for (Ship ship : ships) {
+            if (ship.name.equalsIgnoreCase(name)) {
                 return ship;
             }
         }
