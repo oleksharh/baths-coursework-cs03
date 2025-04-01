@@ -9,6 +9,9 @@ class Encounter implements Serializable
     private int requiredSkill;
     private int prizeMoney;
 
+    /**This is constructor
+    *@id: id
+    **/
     public Encounter(int id, EncounterType type, String location, int requiredSkill, int prizeMoney)
     {
         this.id = id;
