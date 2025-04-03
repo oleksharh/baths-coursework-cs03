@@ -71,16 +71,13 @@ public class SeaBattles implements BATHS
      * @returns true if War Chest <=0 and the admiral's fleet has no ships 
      * which can be retired. 
      */
-    //Admiral Blue
-     public boolean isDefeated() {
-
+    public boolean isDefeated() {
         return warChest <= 0 && !squadron.hasShips();
     }
     
     /** returns the amount of money in the War Chest
      * @returns the amount of money in the War Chest
      */
-    //Admiral Blue
     public double getWarChest()
     {
         return this.warChest;
@@ -90,7 +87,6 @@ public class SeaBattles implements BATHS
     /**Returns a String representation of all ships in the reserve fleet
      * @return a String representation of all ships in the reserve fleet
      **/
-    //The Quartermaster General
     public String getReserveFleet()
     {   //assumes reserves is a Hashmap
 
@@ -116,7 +112,7 @@ public class SeaBattles implements BATHS
      * or the message "No ships commissioned"
      * @return a String representation of the ships in the admiral's fleet
      **/
-    public String getSquadron()//Admiral Blue
+    public String getSquadron()
     {
         if (squadron.hasShips()) {
             return squadron.toString();
@@ -130,6 +126,7 @@ public class SeaBattles implements BATHS
      **/
     public String getSunkShips()
     {
+
         return "no ships sunk yet";
     }
     

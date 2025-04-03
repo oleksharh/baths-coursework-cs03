@@ -17,9 +17,22 @@ class Squadron implements Serializable {
         ships.remove(ship);
     }
 
+    /**Checks if the squadron has any ships
+     * @return true if the squadron has ships, false otherwise
+     * **/
     public boolean hasShips()
     {
         return !ships.isEmpty();
+    }
+
+    public List<Ship> getSunkShips() {
+        List<Ship> sunkShips = new ArrayList<>();
+        for (Ship ship : ships) {
+            if (ship.state == ShipState.SUNK) {
+                sunkShips.add(ship);
+            }
+        }
+        return sunkShips;
     }
 
     public List<Ship> getShips() { return ships; }

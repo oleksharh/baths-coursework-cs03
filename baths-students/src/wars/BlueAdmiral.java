@@ -10,7 +10,12 @@ class BlueAdmiral implements Serializable {
         this.name = name;
         this.warChest = warChest;
         this.squadron = new Squadron();
-    }}
+    }
+
+    public boolean isDefeated() {
+        return warChest <= 0 && !squadron.hasShips();
+    }
+}
 
 //    public void commissionShip(Ship ship) {
 //        if (warChest >= ship.getCommissionFee()) {
