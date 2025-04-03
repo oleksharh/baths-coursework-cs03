@@ -40,8 +40,6 @@ public class SeaBattles implements BATHS
      */  
     public SeaBattles(String admiral, String filename)  //Task 3
     {
-      
-        
        setupShips();
        // setupEncounters();
        // uncomment for testing Task 
@@ -58,7 +56,6 @@ public class SeaBattles implements BATHS
      **/
     public String toString()
     {
-        
         return admiral + " " +
                + warChest + "" +
                "Is OK " +
@@ -71,7 +68,8 @@ public class SeaBattles implements BATHS
      * @returns true if War Chest <=0 and the admiral's fleet has no ships 
      * which can be retired. 
      */
-    public boolean isDefeated() {
+    public boolean isDefeated()
+    {
         return warChest <= 0 && !squadron.hasShips();
     }
     
@@ -90,7 +88,6 @@ public class SeaBattles implements BATHS
     public String getReserveFleet()
     {   //assumes reserves is a Hashmap
 
-        // TODO: Here ships are fetched from the reserve fleet
         // On initialisation, the reserve fleet is the same as the sample data
 
         StringBuilder sb = new StringBuilder();
@@ -126,8 +123,7 @@ public class SeaBattles implements BATHS
      **/
     public String getSunkShips()
     {
-
-        return "no ships sunk yet";
+        return squadron.getSunkShips();
     }
     
     /**Returns a String representation of the all ships in the game
@@ -136,7 +132,21 @@ public class SeaBattles implements BATHS
      **/
     public String getAllShips()
     {
-        return "No ships";
+        StringBuilder sb = new StringBuilder();
+
+        for (Ship ship : reserveFleet.values())
+        {
+            sb.append(ship.toString());
+            sb.append("\n");
+        }
+
+        for (Ship ship : squadron.getShips())
+        {
+            sb.append(ship.toString());
+            sb.append("\n");
+        }
+
+        return !sb.isEmpty() ? sb.toString() : "No ships";
     }
     
     
@@ -145,11 +155,10 @@ public class SeaBattles implements BATHS
      **/
     public String getShipDetails(String nme)
     {
-        Ship ship = reserveFleet.get(nme);
+        Ship ship = reserveFleet.get(nme); // Initially check reserve fleet
 
-        if (ship == null) {
-            return "No such ship";
-        }
+        if (ship == null) // If not foudn in the reserve fleet, check the squadron
+            return squadron.getShipByNameString(nme); // returns either No such ship or toString for ship
 
         return ship.toString();
     }     
@@ -167,27 +176,29 @@ public class SeaBattles implements BATHS
     {
         Ship ship = reserveFleet.get(nme);
 
-        if (ship == null) {
+        if (ship == null)
             return "Not found";
-        } else if (ship.getCommissionFee() > warChest) {
+
+        if (ship.getCommissionFee() > warChest)
             return "Not enough money";
-        } else if (ship.state != ShipState.RESERVE) {
+
+        if (ship.getState() != ShipState.RESERVE)
             return "Not available";
-        }
 
         warChest -= ship.getCommissionFee();
 
-        ship.updateState(ShipState.ACTIVE);
-        squadron.addShip(ship);
+        squadron.commissionShip(ship);
         reserveFleet.remove(nme);
-        return "Ship commissioned";
+        return "Ship " + ship.getName() + " has been commissioned to the squadron";
     }
-        
+
+
     /** Returns true if the ship with the name is in the admiral's squadron, false otherwise.
      * @param name is the name of the ship
      * @return returns true if the ship with the name is in the admiral's squadron, false otherwise.
      **/
-    public boolean isInSquadron(String name) {
+    public boolean isInSquadron(String name)
+    {
         return squadron.getShipByName(name) != null;
     }
     
@@ -197,15 +208,13 @@ public class SeaBattles implements BATHS
      * @return true if ship decommissioned, else false
      **/
     public boolean decommissionShip(String name) {
-        Ship shipToDecommission = squadron.getShipByName(name);
+        Ship ship = squadron.deccommissionShip(name);
 
-        if (shipToDecommission == null) {
-            return false;
-        }
+        if (ship == null)
+            return false; // Ship not found in the squadron
 
-        squadron.removeShip(shipToDecommission);
-        shipToDecommission.updateState(ShipState.RESERVE);
-        reserveFleet.put(name, shipToDecommission);
+        warChest += (double) ship.getCommissionFee() / 2;
+        reserveFleet.put(name, ship);
 
         return true;
     }
@@ -215,13 +224,8 @@ public class SeaBattles implements BATHS
      * @param ref the name of the ship to be restored
      */
     public void restoreShip(String ref) {
-        List<Ship> ships = squadron.getShips();
-
-        for (Ship ship : ships) {
-            if (ship.name.equalsIgnoreCase(ref)) {
-                ship.updateState(ShipState.ACTIVE);
-            }
-        }
+        squadron.restoreShip(ref);
+        // TODO: add unit test calling all the methods to acheive this state
     }
     
 //**********************Encounters************************* 
@@ -231,7 +235,7 @@ public class SeaBattles implements BATHS
      **/
      public boolean isEncounter(int num)
      {
-         return false;
+        return encounters.containsKey(num);
      }
      
      
@@ -253,7 +257,9 @@ public class SeaBattles implements BATHS
       */ 
     public String fightEncounter(int encNo)
     {
-       Encounter en = encounters.get(encNo);
+        // TODO: add event listener usign isDefeated() called every time this method is used
+
+       Encounter en = this.getEncounterById(encNo);
 
         if (en == null) {
             return "-1 No such encounter";
@@ -270,16 +276,16 @@ public class SeaBattles implements BATHS
             return result;
         }
 
-        if (sh.battleSkill >= en.getRequiredSkill()) {
+        if (sh.getBattleSkill() >= en.getRequiredSkill()) {
             warChest += en.getPrizeMoney();
             sh.updateState(ShipState.RESTING);
-            return "0-Encounter won by " + sh.name + ". War Chest: " + warChest;
+            return "0-Encounter won by " + sh.getName() + ". War Chest: " + warChest;
         }
 
         warChest -= en.getPrizeMoney();
         sh.updateState(ShipState.SUNK);
 
-        String result = "2-Encounter lost on battle skill. " + sh.name + " sunk. War Chest: " + warChest;
+        String result = "2-Encounter lost on battle skill. " + sh.getName() + " sunk. War Chest: " + warChest;
         if (isDefeated()) {
             result += " You have been defeated.";
         }
@@ -353,8 +359,16 @@ public class SeaBattles implements BATHS
     }
         
     // Useful private methods to "get" objects from collections/maps
-
     //*******************************************************************************
+    /**
+     * Returns the Encounter object by the given ID.
+     * @param id id/number of the encounter you want to get an object of
+     * @return returns the Encounter object by the given ID or null if not found
+     **/
+    private Encounter getEncounterById(int id)
+    {
+        return encounters.get(id);
+    }
     //*******************************************************************************
   
     //************************ Task 3 ************************************************

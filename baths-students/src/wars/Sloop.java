@@ -12,11 +12,11 @@ class Sloop extends Ship {
     @Override
     public String toString() {
         return "Sloop{" +
-                "name='" + name + '\'' +
-                ", captain='" + captain + '\'' +
-                ", commissionFee=" + commissionFee +
-                ", battleSkill=" + battleSkill +
-                ", state=" + state +
+                "name='" + this.getName() + '\'' +
+                ", captain='" + this.getCaptain() + '\'' +
+                ", commissionFee=" + this.getCommissionFee() +
+                ", battleSkill=" + this.getBattleSkill() +
+                ", state=" + this.getState() +
                 ", hasDoctor=" + hasDoctor +
                 '}';
     }

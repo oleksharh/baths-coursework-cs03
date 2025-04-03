@@ -25,34 +25,96 @@ class Squadron implements Serializable {
         return !ships.isEmpty();
     }
 
-    public List<Ship> getSunkShips() {
-        List<Ship> sunkShips = new ArrayList<>();
+
+    public String getSunkShips() {
+        StringBuilder sunkShips = new StringBuilder();
         for (Ship ship : ships) {
-            if (ship.state == ShipState.SUNK) {
-                sunkShips.add(ship);
+            if (ship.getState() == ShipState.SUNK) {
+                sunkShips.append(ship.getName()).append("\n");
             }
         }
-        return sunkShips;
+        return !sunkShips.isEmpty() ? sunkShips.toString() : "no ships sunk yet";
     }
 
-    public List<Ship> getShips() { return ships; }
+    public List<Ship> getShips()
+    {
+        return ships;
+    }
 
     public Ship getFirstAvailableShip(EncounterType encounterType) {
         for (Ship ship : ships) {
-            if (ship.canFight()) {
+            if (ship.canFight()) { // TODO: canFigth should be for every subclass of the ship inherited classes
                 return ship;
             }
         }
         return null;
     }
 
+    /**Returns the ship with the given name
+     * @param name the name of the ship
+     * @return the ship with the given name, or null if not found
+     * **/
     public Ship getShipByName(String name) {
         for (Ship ship : ships) {
-            if (ship.name.equalsIgnoreCase(name)) {
+            if (ship.getName().equalsIgnoreCase(name)) {
                 return ship;
             }
         }
         return null;
+    }
+
+    /**Returns a String representation of the ship with the given name
+     * @param name the name of the ship
+     * @return a String representation of the ship with the given name
+     * **/
+    public String getShipByNameString(String name)
+    {
+        Ship ship = getShipByName(name);
+        if (ship != null) {
+            return ship.toString();
+        } else {
+            return "No such ship";
+        }
+    }
+
+
+    /**Updates the state of the ship to active
+     * and adds it to the squadron
+     * @param ship the ship to be commissioned
+     * @return true if the ship is commissioned, false otherwise
+     * **/
+    public void commissionShip(Ship ship) {
+        if (ship.getState() == ShipState.RESERVE) {
+            ship.updateState(ShipState.ACTIVE);
+            this.addShip(ship);
+        }
+    }
+
+    /**Takes the ship out of the squadron and updates its state to reserve
+     * @param ship the name of the ship to be decommissioned
+     * @return Ship object that can be added to reserveFleet
+     * **/
+    public Ship deccommissionShip(String ship) {
+        Ship s = getShipByName(ship);
+
+        if (s != null) {
+            if (s.getState() == ShipState.ACTIVE) {
+                s.updateState(ShipState.RESERVE);
+                this.removeShip(s);
+            }
+        }
+
+        return s;
+    }
+
+    /**Restores the ship to the squadron and updates its state to active
+     * @param ship the name of the ship to be restored
+     * **/
+    public void restoreShip(String ship) {
+        Ship shipObj = getShipByName(ship);
+        if (shipObj != null) {
+            shipObj.updateState(ShipState.ACTIVE);
+        }
     }
 
     @Override

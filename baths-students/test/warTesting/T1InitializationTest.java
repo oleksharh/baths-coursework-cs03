@@ -93,7 +93,7 @@ public class T1InitializationTest {
         assertTrue(result);
     }
 
-    // Further tests
+    // TESTS ADDED BY THE TEAM/STUDENTS, ADDITIONAL TESTS
 
     @Test
     public void checkSquadronEmptyStart() {
@@ -131,5 +131,53 @@ public class T1InitializationTest {
         System.out.println(result);
 
         assertTrue(actual);
+    }
+
+    @Test
+    public void checkGetAllShips()
+    {
+        String result = game.getAllShips();
+        String[] xx = {"Victory", "Sophie",
+                "Endeavour", "Arrow", "Belerophon",
+                "Surprise", "Jupiter", "Paris",
+                "Beast", "Athena"};
+        boolean actual = containsText(result, xx);
+        System.out.println(result);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void checkCommissionShip()
+    {
+        String result = game.commissionShip("Victory");
+        String[] xx = {"Victory"};
+        boolean actual = containsText(result, xx);
+        String squadron = game.getSquadron();
+        boolean actual2 = containsText(squadron, xx);
+        boolean actual3 = containsText(game.getReserveFleet(), xx);
+
+        System.out.println(result);
+        System.out.println(squadron);
+
+        assertTrue(actual);
+        assertTrue(actual2);
+        assertFalse(actual3);
+    }
+
+    @Test
+    public void checkDecommissionShip()
+    {
+        game.commissionShip("Victory");
+        boolean result = game.decommissionShip("Victory");
+        assertTrue(result);
+
+        String result2 = game.getReserveFleet();
+        String result3 = game.getSquadron();
+        String[] xx = {"Victory"};
+        boolean actual2 = containsText(result2, xx);
+        boolean actual3 = containsText(result3, xx);
+
+        assertTrue(actual2);
+        assertFalse(actual3);
     }
 }
