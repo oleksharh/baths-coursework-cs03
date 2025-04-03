@@ -429,7 +429,11 @@ public class SeaBattles implements BATHS
      */
     public void saveGame(String fname)
     {   // uses object serialisation 
-           
+           try (ObjectOutputStream oOutS = new ObjectOutputStream(new FileOutputStream(fname))) {
+               oOutS.writeObject(this);
+           } catch (IOException e) {
+
+           }
     }
     
     /** reads all information about the game from the specified file 
@@ -438,10 +442,16 @@ public class SeaBattles implements BATHS
      * @return the game (as an SeaBattles object)
      */
     public SeaBattles loadGame(String fname)
-    {   // uses object serialisation 
-       
-        return null;
-    } 
+    {   // uses object serialisation
+        try (ObjectInputStream oInS = new ObjectInputStream(new FileInputStream(fname))) {
+            return (SeaBattles) oInS.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            // TODO Handle the exception
+            StringBuilder sb = new StringBuilder();
+            sb.append("Error loading game, no such file ").append(fname).append("\n");
+            throw new RuntimeException(e);
+        }
+    }
     
  
 }
