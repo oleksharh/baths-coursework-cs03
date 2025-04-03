@@ -14,15 +14,12 @@ class Frigate extends Ship {
 
 
     public boolean canFight(EncounterType type){
-        switch (type){
-            case BLOCKADE:
-                return hasPinnace;
-            case BATTLE:
-            case SKIRMISH:
-                return true;
-            default:
-                return false;
-        }
+        return switch (type) {
+            case BLOCKADE -> hasPinnace;
+            case BATTLE, SKIRMISH -> true;
+            default -> false;
+        };
+        // TODO: maybe add encounter param instead of type to carry out battleskill and other compariosns
     }
 
     @Override
