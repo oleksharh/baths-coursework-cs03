@@ -8,7 +8,7 @@ class Sloop extends Ship {
         super(name, captain, commissionFee, 5, state);
         this.hasDoctor = hasDoctor;
     }
-    @Override
+
     public boolean canFight(EncounterType type) {
         return type == EncounterType.BATTLE || type == EncounterType.SKIRMISH;
     }
