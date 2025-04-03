@@ -22,7 +22,15 @@ class Squadron implements Serializable {
      * **/
     public boolean hasShips()
     {
-        return !ships.isEmpty();
+        boolean hasShips = false;
+        for (Ship ship : ships)
+        {
+            if (ship.getState() != ShipState.SUNK) {
+                hasShips = true;
+                break;
+            }
+        }
+        return hasShips;
     }
 
 

@@ -44,7 +44,7 @@ abstract class Ship implements Serializable {
 
     public boolean canFight()
     {
-        return state != ShipState.SUNK && state != ShipState.RESERVE;
+        return state != ShipState.SUNK;
     }
 
     public void updateState(ShipState newState)

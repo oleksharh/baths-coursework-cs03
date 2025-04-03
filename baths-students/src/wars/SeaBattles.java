@@ -65,7 +65,7 @@ public class SeaBattles implements BATHS
     
     /** returns true if War Chest <=0 and the admiral's squadron has no ships which 
      * can be retired. 
-     * @returns true if War Chest <=0 and the admiral's fleet has no ships 
+     * @returns true if War Chest <=0 and the admiral's fleet has no ships
      * which can be retired. 
      */
     public boolean isDefeated()
@@ -258,36 +258,40 @@ public class SeaBattles implements BATHS
     public String fightEncounter(int encNo)
     {
         // TODO: add event listener usign isDefeated() called every time this method is used
+        // TODO: add logic to the backend classes
+        // TODO: for every ship inherited class add, canfight methods and check methods of their state depending
+        //  on the type of ship and their running costs
 
-       Encounter en = this.getEncounterById(encNo);
 
-        if (en == null) {
+       Encounter encounter = encounters.get(encNo);
+
+        if (encounter == null) {
             return "-1 No such encounter";
         }
 
-        Ship sh = squadron.getFirstAvailableShip(en.getType());
+        Ship ship = squadron.getFirstAvailableShip(encounter.getType());
 
-        if (sh == null) {
-            warChest -= en.getPrizeMoney();
+        if (ship == null) {
+            warChest -= encounter.getPrizeMoney();
             String result = "1-Encounter lost as no ship available. War Chest: " + warChest;
             if (isDefeated()) {
-                result += " You have been defeated.";
+                result += "\nYou have been defeated.";
             }
             return result;
         }
 
-        if (sh.getBattleSkill() >= en.getRequiredSkill()) {
-            warChest += en.getPrizeMoney();
-            sh.updateState(ShipState.RESTING);
-            return "0-Encounter won by " + sh.getName() + ". War Chest: " + warChest;
+        if (ship.getBattleSkill() >= encounter.getRequiredSkill()) {
+            warChest += encounter.getPrizeMoney();
+            ship.updateState(ShipState.RESTING);
+            return "0-Encounter won by " + ship.getName() + ". War Chest: " + warChest;
         }
 
-        warChest -= en.getPrizeMoney();
-        sh.updateState(ShipState.SUNK);
+        warChest -= encounter.getPrizeMoney();
+        ship.updateState(ShipState.SUNK);
 
-        String result = "2-Encounter lost on battle skill. " + sh.getName() + " sunk. War Chest: " + warChest;
+        String result = "2-Encounter lost on battle skill. " + ship.getName() + " sunk. War Chest: " + warChest;
         if (isDefeated()) {
-            result += " You have been defeated.";
+            result += "\nYou have been defeated.";
         }
 
         return result;
@@ -360,14 +364,13 @@ public class SeaBattles implements BATHS
         
     // Useful private methods to "get" objects from collections/maps
     //*******************************************************************************
-    /**
-     * Returns the Encounter object by the given ID.
-     * @param id id/number of the encounter you want to get an object of
-     * @return returns the Encounter object by the given ID or null if not found
-     **/
-    private Encounter getEncounterById(int id)
+    private EncounterType getEncounterTypeById(int id)
     {
-        return encounters.get(id);
+        Encounter enc = encounters.get(id);
+        if (enc != null) {
+            return enc.getType();
+        }
+        return null;
     }
     //*******************************************************************************
   
