@@ -56,10 +56,15 @@ public class SeaBattles implements BATHS
      **/
     public String toString()
     {
-        return admiral + " " +
-               + warChest + "" +
-               "Is OK " +
-               "No ships";
+        return "Name: " + admiral + ", " + "Balance: "
+                + warChest + ", " + 
+                "Defeated: " + isDefeated() + ", " +
+                getSquadron() + " " +
+                getReserveFleet();
+               
+                
+                
+               
     }
     
     
