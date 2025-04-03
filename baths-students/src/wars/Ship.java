@@ -2,11 +2,31 @@ package wars;
 import java.io.*;
 
 abstract class Ship implements Serializable {
-    protected String name;
-    protected String captain;
-    protected int commissionFee;
-    protected int battleSkill;
-    protected ShipState state;
+    private String name;
+    private String captain;
+    private int commissionFee;
+    private int battleSkill;
+    private ShipState state;
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getCaptain()
+    {
+        return captain;
+    }
+
+    public int getBattleSkill()
+    {
+        return battleSkill;
+    }
+
+    public ShipState getState()
+    {
+        return state;
+    }
 
     public Ship(String name, String captain, int commissionFee, int battleSkill, ShipState state)
     {

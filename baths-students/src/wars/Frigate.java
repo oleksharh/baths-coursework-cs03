@@ -15,11 +15,11 @@ class Frigate extends Ship {
     @Override
     public String toString() {
         return "Frigate{" +
-                "name='" + name + '\'' +
-                ", captain='" + captain + '\'' +
-                ", commissionFee=" + commissionFee +
-                ", battleSkill=" + battleSkill +
-                ", state=" + state +
+                "name='" + this.getName() + '\'' +
+                ", captain='" + this.getCaptain() + '\'' +
+                ", commissionFee=" + this.getCommissionFee() +
+                ", battleSkill=" + this.getBattleSkill() +
+                ", state=" + this.getState() +
                 ", numCannons=" + numCannons +
                 ", hasPinnace=" + hasPinnace +
                 '}';
