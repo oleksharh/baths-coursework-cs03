@@ -51,8 +51,8 @@ class Squadron implements Serializable {
 
     public Ship getFirstAvailableShip(EncounterType encounterType) {
         for (Ship ship : ships) {
-            if (ship.canFight()) { // TODO: canFigth should be for every subclass of the ship inherited classes
-                return ship;
+            if (ship.getState() == ShipState.ACTIVE) {
+                return ship; //  pick first active ship regardless of type
             }
         }
         return null;
@@ -118,10 +118,20 @@ class Squadron implements Serializable {
     /**Restores the ship to the squadron and updates its state to active
      * @param ship the name of the ship to be restored
      * **/
-    public void restoreShip(String ship) {
+    public String restoreShip(String ship) {
         Ship shipObj = getShipByName(ship);
-        if (shipObj != null) {
+
+        if (shipObj == null) {
+            return "No such ship is currently present in your squadron.";
+        }
+
+        if (shipObj.getState() == ShipState.RESTING) {
             shipObj.updateState(ShipState.ACTIVE);
+            return "Ship " + shipObj.getName() + " has been successfully restored to ACTIVE state.";
+        } else if (shipObj.getState() == ShipState.ACTIVE) {
+            return "Ship " + shipObj.getName() + " is already ACTIVE.";
+        } else {
+            return "Ship " + shipObj.getName() + " cannot be restored (must be RESTING).";
         }
     }
 

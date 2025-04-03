@@ -12,6 +12,19 @@ class Frigate extends Ship {
         this.hasPinnace = hasPinnace;
     }
 
+
+    public boolean canFight(EncounterType type){
+        switch (type){
+            case BLOCKADE:
+                return hasPinnace;
+            case BATTLE:
+            case SKIRMISH:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     @Override
     public String toString() {
         return "Frigate{" +
@@ -25,3 +38,4 @@ class Frigate extends Ship {
                 '}';
     }
 }
+

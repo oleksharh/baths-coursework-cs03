@@ -52,6 +52,8 @@ abstract class Ship implements Serializable {
         this.state = newState;
     }
 
+    public abstract boolean canFight(EncounterType type);
+
     /*
         * Returns true if the ship is in an active state (i.e., not sunk or in reserve).
      */

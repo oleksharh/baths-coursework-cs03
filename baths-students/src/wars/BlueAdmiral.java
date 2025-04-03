@@ -17,12 +17,15 @@ class BlueAdmiral implements Serializable {
     }
 }
 
-//    public void commissionShip(Ship ship) {
-//        if (warChest >= ship.getCommissionFee()) {
-//            squadron.addShip(ship);
-//            warChest -= ship.getCommissionFee();
-//        }
-//    }
+
+
+
+//  public void commissionShip(Ship ship) {
+ //     if (warChest >= ship.getCommissionFee()) {
+//           squadron.addShip(ship);
+ //          warChest -= ship.getCommissionFee();
+//       }
+// }
 
 //    public void decommissionShip(Ship ship) {
 //        squadron.removeShip(ship);

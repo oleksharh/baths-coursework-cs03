@@ -12,6 +12,11 @@ class ManOWar extends Ship {
     }
 
     @Override
+    public boolean canFight(EncounterType type) {
+        return type == EncounterType.BLOCKADE || type == EncounterType.BATTLE;
+    }
+
+    @Override
     public String toString() {
         return "ManOWar{" +
                 "name='" + this.getName() + '\'' +
