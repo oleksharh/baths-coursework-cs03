@@ -1,6 +1,12 @@
 package wars;
 import java.io.*;
 
+
+/**
+ * A basic class for all types of ships.
+ * Stores common details like name, captain, skill, and state.
+ * Other ship types like Frigate or ManOWar will extend this.
+ */
 abstract class Ship implements Serializable {
     private String name;
     private String captain;
@@ -8,26 +14,15 @@ abstract class Ship implements Serializable {
     private int battleSkill;
     private ShipState state;
 
-    public String getName()
-    {
-        return name;
-    }
-
-    public String getCaptain()
-    {
-        return captain;
-    }
-
-    public int getBattleSkill()
-    {
-        return battleSkill;
-    }
-
-    public ShipState getState()
-    {
-        return state;
-    }
-
+    /**
+     * Creates a ship with the given details.
+     *
+     * @param name          the ship's name
+     * @param captain       the captain's name
+     * @param commissionFee the cost to use the ship
+     * @param battleSkill   the ship's skill in battle
+     * @param state         the ship's starting state
+     */
     public Ship(String name, String captain, int commissionFee, int battleSkill, ShipState state)
     {
         this.name = name;
@@ -37,25 +32,67 @@ abstract class Ship implements Serializable {
         this.state = state;
     }
 
+    /** @return the ship's name */
+    public String getName()
+    {
+        return name;
+    }
+
+    /** @return the captain's name */
+    public String getCaptain()
+    {
+        return captain;
+    }
+
+    /** @return the ship's battle skill level */
+    public int getBattleSkill()
+    {
+        return battleSkill;
+    }
+
+    /** @return the ship's current state */
+    public ShipState getState()
+    {
+        return state;
+    }
+
+    /** @return the ship's commission fee */
     public int getCommissionFee()
     {
         return commissionFee;
     }
 
+    /**
+     * Checks if the ship can fight (not sunk).
+     *
+     * @return true if ship is not sunk
+     */
     public boolean canFight()
     {
         return state != ShipState.SUNK;
     }
 
+    /**
+     * Changes the ship's state to a new one.
+     *
+     * @param newState the new state to set
+     */
     public void updateState(ShipState newState)
     {
         this.state = newState;
     }
 
+    /**
+     * Checks if the ship can fight in a specific type of encounter.
+     * (Each subclass will define this.)
+     *
+     * @param type the type of encounter
+     * @return true if this ship type can fight in it
+     */
     public abstract boolean canFight(EncounterType type);
 
-    /*
-        * Returns true if the ship is in an active state (i.e., not sunk or in reserve).
+    /**
+     * @return true if the ship is RESTING
      */
     public boolean isActive()
     {
@@ -65,8 +102,9 @@ abstract class Ship implements Serializable {
         return false;
     }
 
-    /*
-        * Returns true if the ship is in a Rest state.
+
+    /**
+     * @return true if the ship is RESTING
      */
     public boolean isResting()
     {
@@ -76,15 +114,17 @@ abstract class Ship implements Serializable {
         return false;
     }
 
-    /*
-        * Returns true if the ship is in a sunk state.
+    /**
+     * @return true if the ship is SUNK
      */
     public boolean isSunk()
     {
         return this.state == ShipState.SUNK;
     }
 
-
+    /**
+     * Shows the ship’s details as a string.
+     */
     @Override
     public String toString() {
         return "Ship{" +
@@ -95,5 +135,4 @@ abstract class Ship implements Serializable {
                 ", state=" + state +
                 '}';
     }
-
 }

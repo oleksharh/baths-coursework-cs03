@@ -10,9 +10,8 @@ class Frigate extends Ship {
     private int numCannons;
     private boolean hasPinnace;
 
-    /**Constructor:
+    /**
      * Creates a Frigate object with all the needed info.
-     *
      * @param name        the name of the ship
      * @param captain     the captain's name
      * @param battleSkill skill level of the ship
