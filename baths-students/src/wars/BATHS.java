@@ -18,7 +18,6 @@ public interface BATHS extends Serializable {
      * whether defeated or not, and the ships currently in the
      * squadron even if resting,(or, "No ships" if squadron is empty),
      * ships in the reserve fleet and ships sunk
-     *
      * @return a String representation of the state of the game,
      * including the name of the admiral, state of the warChest,
      * whether defeated or not, and the ships currently in the
@@ -55,7 +54,6 @@ public interface BATHS extends Serializable {
     /**
      * Returns a String representation of the ships in the admiral's squadron
      * or the message "No ships commissioned"
-     *
      * @return a String representation of the ships in the admiral's fleet
      **/
     public String getSquadron();

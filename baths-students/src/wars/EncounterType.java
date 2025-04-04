@@ -2,7 +2,8 @@ package wars;
 
 import java.io.*;
 /**
- * Enumeration class EncounterType - write a description of the enum class here
+ * Enumeration class EncounterType
+ * Defines states of the encounters
  * 
  * @author A.Marczyk
  * @version 12/02/2025
