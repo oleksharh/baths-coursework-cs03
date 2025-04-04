@@ -138,8 +138,8 @@ public class T5FightEncounterTest {
     public void manOWarFacingBattleRestingNotInSquadron() {
         game.commissionShip("Victory");
         game.fightEncounter(10);  //wins and rests
-
-        assertFalse(game.isInSquadron("Victory")); 
+        System.out.println(game.isInSquadron("Victory"));
+        assertFalse(game.isInSquadron("Victory"));
     }
     
     @Test

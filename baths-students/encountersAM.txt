@@ -1,5 +1,5 @@
 Battle,Trafalgar,3,300
-Skirmish,BelleIsle,3,120
+Skirmish,Belle Isle,3,120
 Blockade,Brest,3,150
 Battle,StMalo,9,200
 Battle,Dieppe,7,90

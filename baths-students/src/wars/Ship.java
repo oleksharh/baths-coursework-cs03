@@ -65,6 +65,26 @@ abstract class Ship implements Serializable {
         return false;
     }
 
+    /*
+        * Returns true if the ship is in a Rest state.
+     */
+    public boolean isResting()
+    {
+        if (this.state == ShipState.RESTING)
+            return true;
+
+        return false;
+    }
+
+    /*
+        * Returns true if the ship is in a sunk state.
+     */
+    public boolean isSunk()
+    {
+        return this.state == ShipState.SUNK;
+    }
+
+
     @Override
     public String toString() {
         return "Ship{" +

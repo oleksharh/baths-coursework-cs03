@@ -41,7 +41,7 @@ class Squadron implements Serializable {
                 sunkShips.append(ship.getName()).append("\n");
             }
         }
-        return !sunkShips.isEmpty() ? sunkShips.toString() : "no ships sunk yet";
+        return !sunkShips.isEmpty() ? sunkShips.toString() : "No ships sunk yet";
     }
 
     public List<Ship> getShips()
@@ -125,10 +125,10 @@ class Squadron implements Serializable {
             return "No such ship is currently present in your squadron.";
         }
 
-        if (shipObj.getState() == ShipState.RESTING) {
+        if (shipObj.isResting()) {
             shipObj.updateState(ShipState.ACTIVE);
             return "Ship " + shipObj.getName() + " has been successfully restored to ACTIVE state.";
-        } else if (shipObj.getState() == ShipState.ACTIVE) {
+        } else if (shipObj.isActive()) {
             return "Ship " + shipObj.getName() + " is already ACTIVE.";
         } else {
             return "Ship " + shipObj.getName() + " cannot be restored (must be RESTING).";

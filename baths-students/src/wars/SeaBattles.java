@@ -56,15 +56,12 @@ public class SeaBattles implements BATHS
      **/
     public String toString()
     {
+        String defeated = isDefeated() ? "Defeated" : "Is OK";
         return "Name: " + admiral + ", " + "Balance: "
                 + warChest + ", " + 
-                "Defeated: " + isDefeated() + ", " +
+                "Defeated: " + defeated + ", " +
                 getSquadron() + " " +
                 getReserveFleet();
-               
-                
-                
-               
     }
     
     
@@ -179,7 +176,7 @@ public class SeaBattles implements BATHS
      **/        
     public String commissionShip(String nme)
     {
-        Ship ship = reserveFleet.get(nme);
+        Ship ship = this.getShipByName(nme);
 
         if (ship == null)
             return "Not found";
@@ -194,7 +191,7 @@ public class SeaBattles implements BATHS
 
         squadron.commissionShip(ship);
         reserveFleet.remove(nme);
-        return "Ship " + ship.getName() + " has been commissioned to the squadron";
+        return "Ship commissioned to the squadron: " + ship.getName();
 
         // TODO: add upper and lower case letter reader for Ship's Name(maybe other Strings)
     }
@@ -206,7 +203,21 @@ public class SeaBattles implements BATHS
      **/
     public boolean isInSquadron(String name)
     {
-        return squadron.getShipByName(name) != null;
+        Ship ship = squadron.getShipByName(name);
+        boolean actual = ship != null;
+        if (actual)
+        {
+            if (ship.isResting())
+            {
+                actual = false;
+            }
+        }
+        if (actual && ship.isSunk())
+        {
+            actual = false;
+        }
+
+        return actual;
     }
     
     /** Decommissions a ship from the squadron to the reserve fleet (if they are in the squadron)
@@ -391,7 +402,14 @@ public class SeaBattles implements BATHS
     //*******************************************************************************
   
     //************************ Task 3 ************************************************
-
+    private Ship getShipByName(String name)
+    {
+        Ship ship = reserveFleet.get(name);
+        if (ship == null) {
+            ship = squadron.getShipByName(name);
+        }
+        return ship;
+    }
     
     //******************************** Task 3.5 **********************************
     /** reads data about encounters from a text file and stores in collection of

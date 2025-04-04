@@ -94,6 +94,7 @@ public class T4ShipCommissionedTest {
         game.commissionShip("Sophie"); 
         String result = game.commissionShip("Sophie"); //try to commission again
         boolean actual= result.contains("Not available");
+        System.out.println(result);
         assertTrue(actual);
     }
     

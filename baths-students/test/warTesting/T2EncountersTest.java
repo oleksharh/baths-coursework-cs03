@@ -68,6 +68,7 @@ public class T2EncountersTest {
         String result = game.getAllEncounters();
         String[] xx = {"2", "Skirmish", "Belle Isle", "3","120"};
         actual = containsText(result,xx );
+        System.out.println(result);
         assertTrue(actual);
     }
     

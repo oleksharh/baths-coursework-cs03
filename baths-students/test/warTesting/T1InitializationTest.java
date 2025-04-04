@@ -117,8 +117,6 @@ public class T1InitializationTest {
         String[] xx = {"1", "Battle", "Trafalgar", "3","300"};
         boolean actual = containsText(result, xx);
 
-        System.out.println(result);
-
         assertTrue(actual);
     }
 
@@ -127,8 +125,6 @@ public class T1InitializationTest {
         String result = game.getEncounter(1);
         String[] xx = {"1", "Battle", "Trafalgar", "3","300"};
         boolean actual = containsText(result, xx);
-
-        System.out.println(result);
 
         assertTrue(actual);
     }
@@ -142,7 +138,6 @@ public class T1InitializationTest {
                 "Surprise", "Jupiter", "Paris",
                 "Beast", "Athena"};
         boolean actual = containsText(result, xx);
-        System.out.println(result);
         assertTrue(actual);
     }
 
@@ -156,28 +151,10 @@ public class T1InitializationTest {
         boolean actual2 = containsText(squadron, xx);
         boolean actual3 = containsText(game.getReserveFleet(), xx);
 
-        System.out.println(result);
-        System.out.println(squadron);
-
         assertTrue(actual);
         assertTrue(actual2);
         assertFalse(actual3);
     }
 
-    @Test
-    public void checkDecommissionShip()
-    {
-        game.commissionShip("Victory");
-        boolean result = game.decommissionShip("Victory");
-        assertTrue(result);
 
-        String result2 = game.getReserveFleet();
-        String result3 = game.getSquadron();
-        String[] xx = {"Victory"};
-        boolean actual2 = containsText(result2, xx);
-        boolean actual3 = containsText(result3, xx);
-
-        assertTrue(actual2);
-        assertFalse(actual3);
-    }
 }

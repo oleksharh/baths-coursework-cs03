@@ -93,15 +93,36 @@ public class T6ShipDecommissionTest {
         game.decommissionShip("Paris");
         boolean actual = game.decommissionShip("Paris");;
         assertFalse(actual);
-    }    
-     
-     
-   
+    }
     
     @Test
     public void decommissionNoSuchShip(){
         boolean actual = game.decommissionShip("Boggle");
         assertFalse(actual);
     }
-   
+
+    private boolean containsText(String text, String[] s) {
+        boolean check = true;
+        for(int i=0; i < s.length; i++)
+            check = check && text.contains(s[i]);
+        return check;
+    }
+
+    @Test
+    public void checkDecommissionShip()
+    {
+        game.commissionShip("Victory");
+        boolean result = game.decommissionShip("Victory");
+        assertTrue(result);
+
+        String result2 = game.getReserveFleet();
+        String result3 = game.getSquadron();
+        String[] xx = {"Victory"};
+        boolean actual2 = containsText(result2, xx);
+        boolean actual3 = containsText(result3, xx);
+
+        assertTrue(actual2);
+        assertFalse(actual3);
+    }
+
 }
