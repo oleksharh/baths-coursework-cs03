@@ -231,6 +231,11 @@ public class SeaBattles implements BATHS
         if (ship == null)
             return false; // Ship not found in the squadron
 
+        if (ship.isSunk())
+        {
+            return false; // Ship is sunk, cannot decommission
+        }
+
         warChest += (double) ship.getCommissionFee() / 2;
         reserveFleet.put(name, ship);
 
@@ -277,8 +282,6 @@ public class SeaBattles implements BATHS
     {
         // TODO: add event listener usign isDefeated() called every time this method is used
         // TODO: add logic to the backend classes
-        // TODO: for every ship inherited class add, canfight methods and check methods of their state depending
-        //  on the type of ship and their running costs(DONE)
 
 
        Encounter encounter = encounters.get(encNo);
@@ -300,7 +303,7 @@ public class SeaBattles implements BATHS
 
         if (!ship.canFight(encounter.getType())) {
             warChest -= encounter.getPrizeMoney();
-            String result = "1-Encounter lost as no suitable ship available. War Chest: " + warChest;
+            String result = "1-Encounter lost as no ship available. War Chest: " + warChest;
             if (isDefeated()) {
                 result += "\nYou have been defeated.";
             }
