@@ -40,10 +40,13 @@ public class SeaBattles implements BATHS
      */  
     public SeaBattles(String admiral, String filename)  //Task 3
     {
-       setupShips();
-       // setupEncounters();
-       // uncomment for testing Task 
-       // readEncounters(filename);
+        setupShips();
+        setupEncounters();
+        // uncomment for testing Task
+        this.admiral = admiral;
+        this.warChest = 1000;
+        squadron = new Squadron();
+        readEncounters(filename);
     }
     
     
