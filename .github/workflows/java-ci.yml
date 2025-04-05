@@ -1,4 +1,4 @@
-name: Java CI (Manual JUnit)
+name: Java CI (Manual JUnit - Split Steps)
 
 on:
   push:
@@ -26,20 +26,28 @@ jobs:
         wget https://repo1.maven.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar -O lib/junit-4.13.2.jar
         wget https://repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar -O lib/hamcrest-core-1.3.jar
 
-
     - name: Compile Java code
       run: |
         mkdir -p out
         javac -cp "lib/*" -d out baths-students/src/wars/*.java baths-students/test/warTesting/*.java
 
-    - name: Run All JUnit Tests
-      run: |
-        cd out
-        java -cp ".:../lib/*" org.junit.runner.JUnitCore \
-          warTesting.T1InitializationTest \
-          warTesting.T2EncountersTest \
-          warTesting.T3ShipsTest \
-          warTesting.T4ShipCommissionedTest \
-          warTesting.T5FightEncounterTest \
-          warTesting.T6ShipDecommissionTest \
-          warTesting.T7ChallengeSequences
+    - name: Run T1InitializationTest
+      run: java -cp "out:lib/*" org.junit.runner.JUnitCore warTesting.T1InitializationTest
+
+    - name: Run T2EncountersTest
+      run: java -cp "out:lib/*" org.junit.runner.JUnitCore warTesting.T2EncountersTest
+
+    - name: Run T3ShipsTest
+      run: java -cp "out:lib/*" org.junit.runner.JUnitCore warTesting.T3ShipsTest
+
+    - name: Run T4ShipCommissionedTest
+      run: java -cp "out:lib/*" org.junit.runner.JUnitCore warTesting.T4ShipCommissionedTest
+
+    - name: Run T5FightEncounterTest
+      run: java -cp "out:lib/*" org.junit.runner.JUnitCore warTesting.T5FightEncounterTest
+
+    - name: Run T6ShipDecommissionTest
+      run: java -cp "out:lib/*" org.junit.runner.JUnitCore warTesting.T6ShipDecommissionTest
+
+    - name: Run T7ChallengeSequences
+      run: java -cp "out:lib/*" org.junit.runner.JUnitCore warTesting.T7ChallengeSequences
