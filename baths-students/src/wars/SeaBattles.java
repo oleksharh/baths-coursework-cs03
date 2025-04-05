@@ -184,8 +184,6 @@ public class SeaBattles implements BATHS
         squadron.commissionShip(ship);
         reserveFleet.remove(nme);
         return "Ship commissioned to the squadron: " + ship.getName();
-
-        // TODO: add upper and lower case letter reader for Ship's Name(maybe other Strings)
     }
 
 
@@ -355,7 +353,10 @@ public class SeaBattles implements BATHS
     {
         encounters = new HashMap<Integer, Encounter>();
 
-        readEncounters("baths-students/encountersAM.txt");
+        readEncounters("encountersAM.txt");
+
+        if (encounters.isEmpty())
+            readEncounters("baths-students/encountersAM.txt");
     }
         
     // Useful private methods to "get" objects from collections/maps
