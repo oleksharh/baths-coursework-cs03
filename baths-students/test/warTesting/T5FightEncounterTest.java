@@ -321,8 +321,84 @@ public class T5FightEncounterTest {
  
 //    //Sloop - write your own tests
 //    
-  
-    // TODO: Sloop - write your own tests
-    
 
+    @Test
+    public void sloopFacingBattleWins() {
+        game.commissionShip("Arrow");
+        String actual = game.fightEncounter(1);
+        assertTrue(actual.contains("won"));
+    }
+
+    @Test
+    public void sloopFacingBattleWinsMoney() {
+        double expected = 1000+300-150;
+        game.commissionShip("Arrow");
+        game.fightEncounter(1);
+        double actual = game.getWarChest();
+        assertEquals(expected, actual,0.5);
+    }
+
+    @Test
+    public void sloopFacingBattleLoses() {
+        game.commissionShip("Arrow");
+        String actual = game.fightEncounter(4);
+        assertTrue(actual.contains("lost"));
+    }
+
+    @Test
+    public void sloopFacingBattleLosesMoney() {
+        double expected = 1000-150-200;
+        game.commissionShip("Arrow");
+        game.fightEncounter(4);
+        double actual = game.getWarChest();
+        assertEquals(expected, actual,0.5);
+    }
+
+    @Test
+    public void sloopFacingSkirmishWins() {
+        game.commissionShip("Arrow");
+        String actual = game.fightEncounter(2);
+        assertTrue(actual.contains("won"));
+    }
+
+    @Test
+    public void sloopFacingSkirmishWinsMoney() {
+        double expected = 1000+120-150;
+        game.commissionShip("Arrow");
+        game.fightEncounter(2);
+        double actual = game.getWarChest();
+        assertEquals(expected, actual,0.5);
+    }
+
+    @Test
+    public void sloopFacingSkirmishLoses() {
+        game.commissionShip("Arrow");
+        String actual = game.fightEncounter(6);
+        assertTrue(actual.contains("lost"));
+    }
+
+    @Test
+    public void sloopFacingSkirmishLosesMoney() {
+        double expected = 1000-150-45;
+        game.commissionShip("Arrow");
+        game.fightEncounter(6);
+        double actual = game.getWarChest();
+        assertEquals(expected, actual,0.5);
+    }
+
+    @Test
+    public void sloopFacingSkirmishNoDoctorLoses() {
+        game.commissionShip("Beast");
+        String actual = game.fightEncounter(6);
+        assertTrue(actual.contains("lost"));
+    }
+
+    @Test
+    public void sloopFacingSkirmishNoDoctorLosesMoney() {
+        double expected = 1000-400-45;
+        game.commissionShip("Beast");
+        game.fightEncounter(6);
+        double actual = game.getWarChest();
+        assertEquals(expected, actual,0.5);
+    }
 }
