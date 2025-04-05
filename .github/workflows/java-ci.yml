@@ -51,3 +51,6 @@ jobs:
 
     - name: Run T7ChallengeSequences
       run: java -cp "out:lib/*" org.junit.runner.JUnitCore warTesting.T7ChallengeSequences
+
+    - name: Run T8CommissionAllShipsTest
+      run: java -cp "out:lib/*" org.junit.runner.JUnitCore warTesting.T8CommissionAllShipsTest
