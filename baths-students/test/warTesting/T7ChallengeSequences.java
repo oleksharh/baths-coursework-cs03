@@ -142,8 +142,6 @@ public class T7ChallengeSequences {
         newGame.loadGame("testSave.txt");
         String actual = newGame.fightEncounter(5);
 
-        System.out.println(newGame.toString());
-
         assertTrue(actual.contains("no ship"));
 
         // Deletes the file after the test
