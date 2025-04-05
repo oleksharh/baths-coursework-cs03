@@ -94,7 +94,6 @@ public class GameUI
                  myBattles2 = myBattles.loadGame("olenka.dat");
 
                  System.out.println(myBattles2.toString());
-                 myBattles = myBattles2;
               }
         }
         System.out.println("Thank-you");

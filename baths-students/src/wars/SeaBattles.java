@@ -56,15 +56,12 @@ public class SeaBattles implements BATHS
     public String toString()
     {
         String defeated = isDefeated() ? "Defeated" : "Is OK";
-        return "Name: " + admiral + ", " + "Balance: "
-                + warChest + ", " + 
-                "Defeated: " + defeated + ", " +
-                getSquadron() + " " +
-                getReserveFleet();
-
-        // TODO: Make it easier to read
+        return  "\n  Name: " + admiral + ",\n" +
+                "  Balance: " + warChest + ",\n" +
+                "  Defeated: " + defeated + ",\n" +
+                "  Squadron: " + getSquadron().replace("Squadron:\n", "")  +
+                "  ReserveFleet: " + getReserveFleet();
     }
-    
     
     /** returns true if War Chest <=0 and the admiral's squadron has no ships which 
      * can be retired. 
@@ -360,7 +357,7 @@ public class SeaBattles implements BATHS
 
         return "No encounters";
     }
-    
+
 
     //****************** private methods for Task 4 functionality*******************
     //*******************************************************************************
@@ -468,7 +465,16 @@ public class SeaBattles implements BATHS
     public SeaBattles loadGame(String fname)
     {   // uses object serialisation
         try (ObjectInputStream oInS = new ObjectInputStream(new FileInputStream(fname))) {
-            return (SeaBattles) oInS.readObject();
+            SeaBattles game = (SeaBattles) oInS.readObject();
+
+            // these values are copied from the loaded game into this instance of the SeaBattles
+            this.admiral = game.admiral;
+            this.warChest = game.warChest;
+            this.reserveFleet = game.reserveFleet;
+            this.encounters = game.encounters;
+            this.squadron = game.squadron;
+
+            return game;
         } catch (IOException | ClassNotFoundException e) {
             StringBuilder sb = new StringBuilder();
             sb.append("Error loading game, no such file ").append(fname).append("\n");

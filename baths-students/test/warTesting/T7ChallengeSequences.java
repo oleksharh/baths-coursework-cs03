@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.io.File;
 
 /**
  *
@@ -131,4 +132,24 @@ public class T7ChallengeSequences {
     
     // TODO: Add your own tests
 
+    @Test
+    public void testSaveAndLoad()
+    {
+        game.commissionShip("Victory");
+        game.fightEncounter(5);
+        game.saveGame("testSave.txt");
+        BATHS newGame = new SeaBattles("TESTNAME");
+        newGame.loadGame("testSave.txt");
+        String actual = newGame.fightEncounter(5);
+
+        System.out.println(newGame.toString());
+
+        assertTrue(actual.contains("no ship"));
+
+        // Deletes the file after the test
+        File file = new File("testSave.txt");
+        if (file.exists()) {
+            assertTrue("Failed to delete test file", file.delete());
+        }
+    }
 }
