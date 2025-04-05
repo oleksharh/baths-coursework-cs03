@@ -63,16 +63,6 @@ abstract class Ship implements Serializable {
     }
 
     /**
-     * Checks if the ship can fight (not sunk).
-     *
-     * @return true if ship is not sunk
-     */
-    public boolean canFight()
-    {
-        return state != ShipState.SUNK;
-    }
-
-    /**
      * Checks if the ship can fight in a specific type of encounter.
      * (Each subclass will define this.)
      *
@@ -81,36 +71,6 @@ abstract class Ship implements Serializable {
      */
     public abstract boolean canFight(EncounterType type);
 
-    /**
-     * @return true if the ship is RESTING
-     */
-    public boolean isActive()
-    {
-        if (this.state == ShipState.ACTIVE)
-            return true;
-
-        return false;
-    }
-
-
-    /**
-     * @return true if the ship is RESTING
-     */
-    public boolean isResting()
-    {
-        if (this.state == ShipState.RESTING)
-            return true;
-
-        return false;
-    }
-
-    /**
-     * @return true if the ship is SUNK
-     */
-    public boolean isSunk()
-    {
-        return this.state == ShipState.SUNK;
-    }
 
     /**
      * Shows the ship’s details as a string.
@@ -146,5 +106,38 @@ abstract class Ship implements Serializable {
     public void setReserve()
     {
         this.state = ShipState.RESERVE;
+    }
+
+    // Methods to check ship's state
+    /**
+     * @return true if the ship is RESTING
+     */
+    public boolean isActive()
+    {
+        return this.state == ShipState.ACTIVE;
+    }
+
+    /**
+     * @return true if the ship is RESTING
+     */
+    public boolean isResting()
+    {
+        return this.state == ShipState.RESTING;
+    }
+
+    /**
+     * @return true if the ship is RESERVE
+     */
+    public boolean isReserve()
+    {
+        return this.state == ShipState.RESERVE;
+    }
+
+    /**
+     * @return true if the ship is SUNK
+     */
+    public boolean isSunk()
+    {
+        return this.state == ShipState.SUNK;
     }
 }

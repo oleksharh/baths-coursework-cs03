@@ -11,7 +11,7 @@ import java.io.*;
  * @version 16/02/25
  */
 
-public class SeaBattles implements BATHS 
+public class SeaBattles implements BATHS
 {
     // may have one HashMap and select on stat
     private String admiral;
@@ -28,9 +28,7 @@ public class SeaBattles implements BATHS
     {
         setupShips();
         setupEncounters();
-        this.admiral = admiral;
-        this.warChest = 1000;
-        squadron = new Squadron();
+        setupDefaults(admiral);
     }
     
     /** Constructor requires the name of the admiral and the
@@ -43,10 +41,8 @@ public class SeaBattles implements BATHS
         setupShips();
         setupEncounters();
         // uncomment for testing Task
-        this.admiral = admiral;
-        this.warChest = 1000;
-        squadron = new Squadron();
         readEncounters(filename);
+        setupDefaults(admiral);
     }
     
     
@@ -65,6 +61,8 @@ public class SeaBattles implements BATHS
                 "Defeated: " + defeated + ", " +
                 getSquadron() + " " +
                 getReserveFleet();
+
+        // TODO: Make it easier to read
     }
     
     
@@ -108,6 +106,8 @@ public class SeaBattles implements BATHS
         }
 
         return "No ships";
+
+        // TODO: REMOVE ALL THE SHIPS AND UNIT TEST THIS METHOD
     }
     
     /**Returns a String representation of the ships in the admiral's squadron
@@ -181,14 +181,11 @@ public class SeaBattles implements BATHS
     {
         Ship ship = this.getShipByName(nme);
 
-        if (ship == null)
-            return "Not found";
+        if (ship == null) return "Not found";
 
-        if (ship.getCommissionFee() > warChest)
-            return "Not enough money";
+        if (ship.getCommissionFee() > warChest) return "Not enough money";
 
-        if (ship.getState() != ShipState.RESERVE)
-            return "Not available";
+        if (!ship.isReserve()) return "Not available";
 
         warChest -= ship.getCommissionFee();
 
@@ -392,6 +389,11 @@ public class SeaBattles implements BATHS
         
     // Useful private methods to "get" objects from collections/maps
     //*******************************************************************************
+
+    /** Returns the ship with the given name from the reserve fleet or the squadron
+     * @param name the name of the ship
+     * @return the ship with the given name from the reserve fleet or the squadron
+     **/
     private Ship getShipByName(String name)
     {
         Ship ship = reserveFleet.get(name);
@@ -399,6 +401,16 @@ public class SeaBattles implements BATHS
             ship = squadron.getShipByName(name);
         }
         return ship;
+    }
+
+    /**Setups the default values for the game, when the constructor is called
+     * @param admiral the name of the admiral
+     * **/
+    private void setupDefaults(String admiral)
+    {
+        this.admiral = admiral;
+        this.warChest = 1000;
+        squadron = new Squadron();
     }
     //*******************************************************************************
   

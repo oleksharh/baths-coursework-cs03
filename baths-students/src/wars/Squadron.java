@@ -43,7 +43,7 @@ class Squadron implements Serializable {
         boolean hasShips = false;
         for (Ship ship : ships)
         {
-            if (ship.getState() != ShipState.SUNK) {
+            if (!ship.isSunk()) {
                 hasShips = true;
                 break;
             }
@@ -59,7 +59,7 @@ class Squadron implements Serializable {
     public String getSunkShips() {
         StringBuilder sunkShips = new StringBuilder();
         for (Ship ship : ships) {
-            if (ship.getState() == ShipState.SUNK) {
+            if (ship.isSunk()) {
                 sunkShips.append(ship.getName()).append("\n");
             }
         }
@@ -82,7 +82,7 @@ class Squadron implements Serializable {
      */
     public Ship getFirstAvailableShip(EncounterType encounterType) {
         for (Ship ship : ships) {
-            if (ship.getState() == ShipState.ACTIVE) {
+            if (ship.isActive()) {
                 return ship;
             }
         }
@@ -123,7 +123,7 @@ class Squadron implements Serializable {
      * @return true if the ship is commissioned, false otherwise
      * **/
     public void commissionShip(Ship ship) {
-        if (ship.getState() == ShipState.RESERVE) {
+        if (ship.isReserve()) {
             ship.setActive();
             this.addShip(ship);
         }
@@ -137,7 +137,7 @@ class Squadron implements Serializable {
         Ship s = getShipByName(ship);
 
         if (s != null) {
-            if (s.getState() == ShipState.ACTIVE) {
+            if (s.isActive()) {
                 s.setReserve();
                 this.removeShip(s);
             }
