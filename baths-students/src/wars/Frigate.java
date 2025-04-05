@@ -38,7 +38,6 @@ class Frigate extends Ship {
             case BATTLE, SKIRMISH -> true;
             default -> false;
         };
-        // TODO: maybe add encounter param instead of type to carry out battleskill and other compariosns
     }
 
     /**

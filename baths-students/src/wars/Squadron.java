@@ -124,7 +124,7 @@ class Squadron implements Serializable {
      * **/
     public void commissionShip(Ship ship) {
         if (ship.getState() == ShipState.RESERVE) {
-            ship.updateState(ShipState.ACTIVE);
+            ship.setActive();
             this.addShip(ship);
         }
     }
@@ -138,7 +138,7 @@ class Squadron implements Serializable {
 
         if (s != null) {
             if (s.getState() == ShipState.ACTIVE) {
-                s.updateState(ShipState.RESERVE);
+                s.setReserve();
                 this.removeShip(s);
             }
         }
@@ -157,7 +157,7 @@ class Squadron implements Serializable {
         }
 
         if (shipObj.isResting()) {
-            shipObj.updateState(ShipState.ACTIVE);
+            shipObj.setActive();
             return "Ship " + shipObj.getName() + " has been successfully restored to ACTIVE state.";
         } else if (shipObj.isActive()) {
             return "Ship " + shipObj.getName() + " is already ACTIVE.";

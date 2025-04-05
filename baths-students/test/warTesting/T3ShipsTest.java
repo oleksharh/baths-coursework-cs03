@@ -102,7 +102,6 @@ public class T3ShipsTest {
         assertTrue(actual);
     }
 
-    
     @Test
     public void ShipInReserveBelerophonDisplayed() {
         String result = game.getReserveFleet();
@@ -121,6 +120,17 @@ public class T3ShipsTest {
     
     //Why were those chosen? You can add more but is it worth it ?
 
+    @Test
+    public void checkGetAllShips()
+    {
+        String result = game.getAllShips();
+        String[] xx = {"Victory", "Sophie",
+                "Endeavour", "Arrow", "Belerophon",
+                "Surprise", "Jupiter", "Paris",
+                "Beast", "Athena"};
+        boolean actual = containsText(result, xx);
+        assertTrue(actual);
+    }
          
 
 }

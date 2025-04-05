@@ -43,7 +43,7 @@ public class T1InitializationTest {
     public void tearDown() {
     }
 
-    // TODO add test methods here.
+    // add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
     //just a local method to check a String for contents
@@ -110,51 +110,4 @@ public class T1InitializationTest {
         boolean actual = containsText(result, xx);
         assertTrue(actual);
     }
-
-    @Test
-    public void checkGetEncounters() {
-        String result = game.getAllEncounters();
-        String[] xx = {"1", "Battle", "Trafalgar", "3","300"};
-        boolean actual = containsText(result, xx);
-
-        assertTrue(actual);
-    }
-
-    @Test
-    public void checkGetEncounter() {
-        String result = game.getEncounter(1);
-        String[] xx = {"1", "Battle", "Trafalgar", "3","300"};
-        boolean actual = containsText(result, xx);
-
-        assertTrue(actual);
-    }
-
-    @Test
-    public void checkGetAllShips()
-    {
-        String result = game.getAllShips();
-        String[] xx = {"Victory", "Sophie",
-                "Endeavour", "Arrow", "Belerophon",
-                "Surprise", "Jupiter", "Paris",
-                "Beast", "Athena"};
-        boolean actual = containsText(result, xx);
-        assertTrue(actual);
-    }
-
-    @Test
-    public void checkCommissionShip()
-    {
-        String result = game.commissionShip("Victory");
-        String[] xx = {"Victory"};
-        boolean actual = containsText(result, xx);
-        String squadron = game.getSquadron();
-        boolean actual2 = containsText(squadron, xx);
-        boolean actual3 = containsText(game.getReserveFleet(), xx);
-
-        assertTrue(actual);
-        assertTrue(actual2);
-        assertFalse(actual3);
-    }
-
-
 }

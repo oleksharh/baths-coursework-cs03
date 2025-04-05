@@ -73,4 +73,6 @@ class Encounter implements Serializable
         return "Encounter ID: " + id + ", Type: " + type + ", Location: " + location +
                ", Required Skill: " + requiredSkill + ", Prize Money: " + prizeMoney;
     }
+
+
 }

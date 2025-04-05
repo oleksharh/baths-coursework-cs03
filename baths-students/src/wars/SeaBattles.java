@@ -251,7 +251,6 @@ public class SeaBattles implements BATHS
      */
     public void restoreShip(String ref) {
         squadron.restoreShip(ref);
-        // TODO: add unit test calling all the methods to acheive this state
     }
     
 //**********************Encounters************************* 
@@ -283,10 +282,6 @@ public class SeaBattles implements BATHS
       */ 
     public String fightEncounter(int encNo)
     {
-        // TODO: add event listener usign isDefeated() called every time this method is used
-        // TODO: add logic to the backend classes
-
-
        Encounter encounter = encounters.get(encNo);
 
         if (encounter == null) {
@@ -315,12 +310,12 @@ public class SeaBattles implements BATHS
 
         if (ship.getBattleSkill() >= encounter.getRequiredSkill()) {
             warChest += encounter.getPrizeMoney();
-            ship.updateState(ShipState.RESTING);
+            ship.setResting();
             return "0-Encounter won by " + ship.getName() + ". War Chest: " + warChest;
         }
 
         warChest -= encounter.getPrizeMoney();
-        ship.updateState(ShipState.SUNK);
+        ship.setSunk();
 
         String result = "2-Encounter lost on battle skill. " + ship.getName() + " sunk. War Chest: " + warChest;
         if (isDefeated()) {
@@ -397,17 +392,6 @@ public class SeaBattles implements BATHS
         
     // Useful private methods to "get" objects from collections/maps
     //*******************************************************************************
-    private EncounterType getEncounterTypeById(int id)
-    {
-        Encounter enc = encounters.get(id);
-        if (enc != null) {
-            return enc.getType();
-        }
-        return null;
-    }
-    //*******************************************************************************
-  
-    //************************ Task 3 ************************************************
     private Ship getShipByName(String name)
     {
         Ship ship = reserveFleet.get(name);
@@ -416,6 +400,10 @@ public class SeaBattles implements BATHS
         }
         return ship;
     }
+    //*******************************************************************************
+  
+    //************************ Task 3 ************************************************
+
     
     //******************************** Task 3.5 **********************************
     /** reads data about encounters from a text file and stores in collection of
@@ -470,14 +458,11 @@ public class SeaBattles implements BATHS
         try (ObjectInputStream oInS = new ObjectInputStream(new FileInputStream(fname))) {
             return (SeaBattles) oInS.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            // TODO Handle the exception
             StringBuilder sb = new StringBuilder();
             sb.append("Error loading game, no such file ").append(fname).append("\n");
             throw new RuntimeException(e);
         }
     }
-    
- 
 }
 
 

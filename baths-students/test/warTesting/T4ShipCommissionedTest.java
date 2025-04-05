@@ -94,7 +94,6 @@ public class T4ShipCommissionedTest {
         game.commissionShip("Sophie"); 
         String result = game.commissionShip("Sophie"); //try to commission again
         boolean actual= result.contains("Not available");
-        System.out.println(result);
         assertTrue(actual);
     }
     
@@ -139,6 +138,30 @@ public class T4ShipCommissionedTest {
         game.commissionShip("Beast"); // not enough money
         boolean actual = (game.getReserveFleet()).contains("Beast");
         assertTrue(actual);
+    }
+
+    // Additional tests added by the team/students
+
+    private boolean containsText(String text, String[] s) {
+        boolean check = true;
+        for(int i=0; i < s.length; i++)
+            check = check && text.contains(s[i]);
+        return check;
+    }
+
+    @Test
+    public void checkCommissionShip()
+    {
+        String result = game.commissionShip("Victory");
+        String[] xx = {"Victory"};
+        boolean actual = containsText(result, xx);
+        String squadron = game.getSquadron();
+        boolean actual2 = containsText(squadron, xx);
+        boolean actual3 = containsText(game.getReserveFleet(), xx);
+
+        assertTrue(actual);
+        assertTrue(actual2);
+        assertFalse(actual3);
     }
       
 }

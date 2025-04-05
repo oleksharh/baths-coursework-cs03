@@ -101,6 +101,8 @@ public class T6ShipDecommissionTest {
         assertFalse(actual);
     }
 
+
+    // Additional test methods Below
     private boolean containsText(String text, String[] s) {
         boolean check = true;
         for(int i=0; i < s.length; i++)

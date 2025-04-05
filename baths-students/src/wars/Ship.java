@@ -73,16 +73,6 @@ abstract class Ship implements Serializable {
     }
 
     /**
-     * Changes the ship's state to a new one.
-     *
-     * @param newState the new state to set
-     */
-    public void updateState(ShipState newState)
-    {
-        this.state = newState;
-    }
-
-    /**
      * Checks if the ship can fight in a specific type of encounter.
      * (Each subclass will define this.)
      *
@@ -134,5 +124,27 @@ abstract class Ship implements Serializable {
                 ", battleSkill=" + battleSkill +
                 ", state=" + state +
                 '}';
+    }
+
+    // Methods for setting different states
+
+    public void setActive()
+    {
+        this.state = ShipState.ACTIVE;
+    }
+
+    public void setResting()
+    {
+        this.state = ShipState.RESTING;
+    }
+
+    public void setSunk()
+    {
+        this.state = ShipState.SUNK;
+    }
+
+    public void setReserve()
+    {
+        this.state = ShipState.RESERVE;
     }
 }

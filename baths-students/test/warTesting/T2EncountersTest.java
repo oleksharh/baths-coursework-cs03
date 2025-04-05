@@ -68,7 +68,6 @@ public class T2EncountersTest {
         String result = game.getAllEncounters();
         String[] xx = {"2", "Skirmish", "Belle Isle", "3","120"};
         actual = containsText(result,xx );
-        System.out.println(result);
         assertTrue(actual);
     }
     
@@ -118,6 +117,17 @@ public class T2EncountersTest {
         String result = game.getEncounter(3);
         boolean actual = result.contains("Blockade")&& result.contains("Brest");
         assertTrue(actual); 
+    }
+
+    // Additional test methods Below
+
+    @Test
+    public void checkGetEncounter() {
+        String result = game.getEncounter(1);
+        String[] xx = {"1", "Battle", "Trafalgar", "3","300"};
+        boolean actual = containsText(result, xx);
+
+        assertTrue(actual);
     }
 
 }

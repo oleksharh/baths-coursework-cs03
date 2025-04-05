@@ -138,7 +138,6 @@ public class T5FightEncounterTest {
     public void manOWarFacingBattleRestingNotInSquadron() {
         game.commissionShip("Victory");
         game.fightEncounter(10);  //wins and rests
-        System.out.println(game.isInSquadron("Victory"));
         assertFalse(game.isInSquadron("Victory"));
     }
     
@@ -323,7 +322,7 @@ public class T5FightEncounterTest {
 //    //Sloop - write your own tests
 //    
   
-    
+    // TODO: Sloop - write your own tests
     
 
 }
