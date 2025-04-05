@@ -24,6 +24,10 @@ public class GameGUI
     private JButton quitBtn = new JButton("Quit");
     private JPanel eastPanel = new JPanel();
 
+
+    /**
+     * Constructor sets everything up and makes the frame visible.
+     */
     public GameGUI()
     {
         makeFrame();
@@ -96,7 +100,9 @@ public class GameGUI
         shipMenu.add(decommission);
     }
 
-    
+    /**
+     * Shows the list of reserve ships in the game.
+     */
     private class ListFleetHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
@@ -108,6 +114,9 @@ public class GameGUI
         }
     }
 
+    /**
+     * Shows the list of ships currently in the squadron.
+     */
     private class ListSquadronHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -118,6 +127,9 @@ public class GameGUI
         }
     }
 
+    /**
+     * Shows details of a specific ship based on user input.
+     */
     private class ViewShipHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -128,6 +140,9 @@ public class GameGUI
         }
     }
 
+    /**
+     * Commissions a ship into the squadron from the reserve fleet.
+     */
     private class CommissionShipHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -137,7 +152,10 @@ public class GameGUI
             JOptionPane.showMessageDialog(myFrame, result);
         }
     }
-    
+
+    /**
+     * Clears the text area in the center of the screen.
+     */
     private class ClearHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
@@ -146,7 +164,10 @@ public class GameGUI
             listing.setVisible(false);            
         }
     }
-    
+
+    /**
+     * Removes a ship from the squadron and moves it back to reserves.
+     */
     private class DecommissionHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
@@ -167,6 +188,9 @@ public class GameGUI
         }
     }
 
+    /**
+     * Displays the current state of the game (war chest, squadron, etc.)
+     */
     private class ViewStateHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -177,6 +201,9 @@ public class GameGUI
         }
     }
 
+    /**
+     * Lets the user choose an encounter to fight.
+     */
     private class FightHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -189,7 +216,10 @@ public class GameGUI
             JOptionPane.showMessageDialog(myFrame, result);
         }
     }
-   
+
+    /**
+     * Hides the text area and the clear button.
+     */
     private class ClearButtonHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
@@ -199,6 +229,9 @@ public class GameGUI
         }
     }
 
+    /**
+     * Quits the program.
+     */
     private class QuitHandler implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -207,6 +240,10 @@ public class GameGUI
         }
     }
 
+    /**
+     * Starts the GUI application.
+     * @param args command line arguments
+     */
     public static void main(String[] args)
     {
         SwingUtilities.invokeLater(new Runnable()
