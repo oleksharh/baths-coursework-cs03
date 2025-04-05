@@ -32,7 +32,14 @@ jobs:
         mkdir -p out
         javac -cp "lib/*" -d out baths-students/src/wars/*.java baths-students/test/warTesting/*.java
 
-    - name: Run JUnit tests
+    - name: Run All JUnit Tests
       run: |
         cd out
-        java -cp ".:../lib/*" org.junit.runner.JUnitCore warTesting.T1InitializationTest
+        java -cp ".:../lib/*" org.junit.runner.JUnitCore \
+          warTesting.T1InitializationTest \
+          warTesting.T2EncountersTest \
+          warTesting.T3ShipsTest \
+          warTesting.T4ShipCommissionedTest \
+          warTesting.T5FightEncounterTest \
+          warTesting.T6ShipDecommissionTest \
+          warTesting.T7ChallengeSequences
