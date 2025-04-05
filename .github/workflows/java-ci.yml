@@ -1,0 +1,27 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'  # or 11, depending on your project
+        distribution: 'temurin'
+
+    - name: Compile and run tests
+      run: |
+        javac -d out -cp src src/wars/*.java test/warTesting/*.java
+        cd out
+        java org.junit.runner.JUnitCore warTesting.T1InitializationTest
