@@ -471,13 +471,6 @@ public class SeaBattles implements BATHS
         try (ObjectInputStream oInS = new ObjectInputStream(new FileInputStream(fname))) {
             SeaBattles game = (SeaBattles) oInS.readObject();
 
-            // these values are copied from the loaded game into this instance of the SeaBattles
-            this.admiral = game.admiral;
-            this.warChest = game.warChest;
-            this.reserveFleet = game.reserveFleet;
-            this.encounters = game.encounters;
-            this.squadron = game.squadron;
-
             return game;
         } catch (IOException | ClassNotFoundException e) {
             StringBuilder sb = new StringBuilder();
